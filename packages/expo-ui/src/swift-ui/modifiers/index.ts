@@ -9,7 +9,11 @@ import { animation } from './animation/index';
 import { background } from './background';
 import { containerShape } from './containerShape';
 import { contentShape } from './contentShape';
-import { createModifier, createModifierWithEventListener, ModifierConfig } from './createModifier';
+import {
+  createModifier,
+  createModifierWithEventListener,
+  type ModifierConfig,
+} from './createModifier';
 import { datePickerStyle } from './datePickerStyle';
 import { environment } from './environment';
 import { gaugeStyle } from './gaugeStyle';
