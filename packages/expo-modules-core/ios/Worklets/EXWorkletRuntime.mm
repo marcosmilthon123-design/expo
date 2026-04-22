@@ -3,28 +3,22 @@
 #import <ExpoModulesWorklets/EXWorkletRuntime.h>
 
 @implementation EXWorkletRuntime {
-#if WORKLETS_ENABLED
-  std::weak_ptr<worklets::WorkletRuntime> _workletRuntime;
-#endif
+  id _opaqueHandle;
 }
 
-#if WORKLETS_ENABLED
-
-- (nonnull instancetype)initWithWorkletRuntime:(std::shared_ptr<worklets::WorkletRuntime> &)workletRuntime
-                                   callInvoker:(std::shared_ptr<react::CallInvoker>)callInvoker
+- (nonnull instancetype)initWithRuntime:(jsi::Runtime &)runtime
+                            callInvoker:(std::shared_ptr<react::CallInvoker>)callInvoker
+                           opaqueHandle:(nonnull id)opaqueHandle
 {
-  if (self = [super initWithRuntime:workletRuntime->getJSIRuntime() callInvoker:callInvoker]) {
-    _workletRuntime = workletRuntime;
+  if (self = [super initWithRuntime:runtime callInvoker:callInvoker]) {
+    _opaqueHandle = opaqueHandle;
   }
-
   return self;
 }
 
-- (std::shared_ptr<worklets::WorkletRuntime>)getWorkletRuntime
+- (nonnull id)opaqueHandle
 {
-  return _workletRuntime.lock();
+  return _opaqueHandle;
 }
-
-#endif
 
 @end

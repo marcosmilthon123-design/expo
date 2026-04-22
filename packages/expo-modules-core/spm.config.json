@@ -87,7 +87,8 @@
           "exclude": [
             "JSI/**",
             "Tests/**",
-            "Worklets/**"
+            "Worklets/**",
+            "WorkletsAdapter/**"
           ],
           "fileMapping": [
             {
@@ -129,7 +130,8 @@
             "Tests/**",
             "BridgeModule/**",
             "Views/**",
-            "Worklets/**"
+            "Worklets/**",
+            "WorkletsAdapter/**"
           ],
           "dependencies": [
             "Hermes",
