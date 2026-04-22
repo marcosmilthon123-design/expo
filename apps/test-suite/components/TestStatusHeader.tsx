@@ -23,6 +23,7 @@ type TestStatusHeaderProps = {
   done: boolean;
   failedCount: number;
   passedCount: number;
+  selectionQuery?: string;
   results?: string;
   onCancel: () => void;
 };
@@ -31,6 +32,7 @@ export default function TestStatusHeader({
   done,
   failedCount,
   passedCount,
+  selectionQuery,
   results,
   onCancel,
 }: TestStatusHeaderProps) {
@@ -39,6 +41,11 @@ export default function TestStatusHeader({
 
   return (
     <View testID="test_suite_results" style={styles.container}>
+      {selectionQuery ? (
+        <Text style={[styles.selectionQuery, { color: theme.text.secondary }]}>
+          Selection query: {selectionQuery}
+        </Text>
+      ) : null}
       {!done && (
         <View style={styles.statusRow}>
           <ActivityIndicator size="small" />
@@ -58,10 +65,7 @@ export default function TestStatusHeader({
         </View>
       )}
       {done && (
-        <View testID="test_suite_text_results" style={styles.countsRow}>
-          {failedCount === 0 && (
-            <Text style={[styles.status, { color: theme.text.success }]}>Success!</Text>
-          )}
+        <View style={styles.countsRow}>
           <Text style={[styles.status, { color: theme.text.success }]}>
             {passedCount}/{totalCount} passed
           </Text>
@@ -71,7 +75,7 @@ export default function TestStatusHeader({
         </View>
       )}
       {done && (
-        <Text style={styles.finalResults} pointerEvents="none" testID="test_suite_final_results">
+        <Text style={styles.hidden} pointerEvents="none" testID="test_suite_final_results">
           {results}
         </Text>
       )}
@@ -103,7 +107,11 @@ const styles = StyleSheet.create({
   spacer: {
     flex: 1,
   },
-  finalResults: {
+  selectionQuery: {
+    fontSize: 13,
+    marginBottom: 4,
+  },
+  hidden: {
     position: 'absolute',
     opacity: 0,
   },

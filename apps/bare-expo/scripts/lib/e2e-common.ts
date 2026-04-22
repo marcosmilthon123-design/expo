@@ -71,7 +71,7 @@ jsEngine: graaljs
       id: "test_suite_text_results"
     timeout: 120000
 - assertVisible:
-    text: "Success!"
+    text: "All tests passed!"
 `);
   }
 
